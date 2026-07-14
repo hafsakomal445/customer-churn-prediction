@@ -1,0 +1,5 @@
+Model,F1
+Tuned Random Forest,0.6307692307692307
+Logistic Regression,0.6092
+XGBoost,0.5798816568047337
+Random Forest,0.5582089552238806
