@@ -66,6 +66,10 @@ Features:
 ## Dashboard
 
 ![Dashboard](reports/screenshots/dashboard.png)
+
+## Live Link
+https://customer-churn-prediction-evyrjk7tt6pssvljbpyxmm.streamlit.app/
+
 ## Author
 
 Hafsa Komal
