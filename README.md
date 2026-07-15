@@ -1,12 +1,34 @@
 # Customer Churn Prediction
 
-## Problem Statement
+## Overview
 
-Predict customer churn using Machine Learning.
+This project predicts whether a telecom customer is likely to churn using Machine Learning.
+
+## Business Problem
+
+Customer churn causes revenue loss for telecom companies.
+This project helps identify customers at risk of leaving.
 
 ## Dataset
 
 IBM Telco Customer Churn Dataset
+
+Rows: 7043
+
+Features: 20+
+
+Target: Churn
+
+## Project Workflow
+
+- Business Understanding
+- Data Cleaning
+- Exploratory Data Analysis
+- Feature Engineering
+- Model Training
+- Hyperparameter Tuning
+- Cross Validation
+- Model Deployment
 
 ## Models Tested
 
@@ -21,14 +43,30 @@ IBM Telco Customer Churn Dataset
 
 Tuned Random Forest
 
-## Cross Validation F1
+Cross Validation F1 Score: 0.6358
 
-0.6358
+## Streamlit Dashboard
 
-## Tech Stack
+Features:
+
+- Churn Prediction
+- Risk Analysis
+- Probability Score
+- Customer Information Dashboard
+
+## Technologies
 
 - Python
-- Scikit-Learn
 - Pandas
+- NumPy
+- Scikit-Learn
+- XGBoost
 - Streamlit
 - Joblib
+## Dashboard
+
+![Dashboard](reports/screenshots/dashboard.png)
+## Author
+
+Hafsa Komal
+Machine Learning Engineer
