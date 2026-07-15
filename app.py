@@ -3,9 +3,9 @@ import pandas as pd
 
 from src.prediction.predict import predict_churn
 
-# ------------------------------------------------
-# Page Configuration
-# ------------------------------------------------
+# ==================================================
+# PAGE CONFIG
+# ==================================================
 
 st.set_page_config(
     page_title="Customer Churn Prediction",
@@ -13,25 +13,49 @@ st.set_page_config(
     layout="wide"
 )
 
-# ------------------------------------------------
-# Title
-# ------------------------------------------------
+# ==================================================
+# HEADER
+# ==================================================
 
-st.title("📉 Customer Churn Prediction")
+st.title("📉 Customer Churn Prediction Dashboard")
 
 st.write(
     "Predict whether a telecom customer is likely to churn."
 )
 
-# ------------------------------------------------
-# Sidebar
-# ------------------------------------------------
+# ==================================================
+# PROJECT METRICS
+# ==================================================
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric(
+        "Best Model",
+        "Random Forest"
+    )
+
+with col2:
+    st.metric(
+        "CV F1 Score",
+        "0.6358"
+    )
+
+with col3:
+    st.metric(
+        "Dataset Size",
+        "7043"
+    )
+
+# ==================================================
+# SIDEBAR
+# ==================================================
 
 st.sidebar.header("Customer Information")
 
-# ------------------------------------------------
-# Customer Inputs
-# ------------------------------------------------
+# ==================================================
+# INPUTS
+# ==================================================
 
 gender = st.selectbox(
     "Gender",
@@ -139,9 +163,9 @@ total_charges = st.number_input(
     value=1000.0
 )
 
-# ------------------------------------------------
-# Prediction Button
-# ------------------------------------------------
+# ==================================================
+# PREDICTION BUTTON
+# ==================================================
 
 if st.button("Predict Churn"):
 
@@ -167,24 +191,88 @@ if st.button("Predict Churn"):
         "TotalCharges": [total_charges]
     })
 
-    prediction, probability = predict_churn(
-        input_df
-    )
+    prediction, probability = predict_churn(input_df)
 
-    st.subheader("Prediction Result")
+    st.markdown("---")
 
-    if prediction == 1:
+    col1, col2 = st.columns(2)
 
-        st.error(
-            f"⚠️ Customer is likely to churn ({probability:.2%})"
+    # ==========================================
+    # LEFT COLUMN
+    # ==========================================
+
+    with col1:
+
+        st.subheader("Prediction Result")
+
+        if prediction == 1:
+
+            st.error(
+                f"⚠️ Customer is likely to churn ({probability:.2%})"
+            )
+
+        else:
+
+            st.success(
+                f"✅ Customer is likely to stay ({1 - probability:.2%})"
+            )
+
+        st.subheader("Churn Probability")
+
+        st.progress(float(probability))
+
+        st.write(
+            f"Probability of Churn: {probability:.2%}"
         )
 
-    else:
+    # ==========================================
+    # RIGHT COLUMN
+    # ==========================================
 
-        st.success(
-            f"✅ Customer is likely to stay ({1 - probability:.2%})"
-        )
+    with col2:
+
+        st.subheader("Risk Analysis")
+
+        if probability < 0.30:
+            risk = "LOW"
+
+        elif probability < 0.60:
+            risk = "MEDIUM"
+
+        else:
+            risk = "HIGH"
+
+        if risk == "LOW":
+            st.success("🟢 LOW RISK")
+
+        elif risk == "MEDIUM":
+            st.warning("🟡 MEDIUM RISK")
+
+        else:
+            st.error("🔴 HIGH RISK")
+
+    # ==========================================
+    # CUSTOMER DATA
+    # ==========================================
+
+    st.markdown("---")
 
     st.subheader("Customer Data")
 
     st.dataframe(input_df)
+
+# ==================================================
+# FOOTER
+# ==================================================
+
+st.markdown("---")
+
+st.markdown(
+    """
+    ### Developed by Hafsa Komal
+
+    Machine Learning Engineer Portfolio Project
+
+    Customer Churn Prediction using Random Forest
+    """
+)
